@@ -508,7 +508,7 @@ header {
    FEATURES SECTION (Homepage)
    =================================== */
 .features {
-    padding: 6rem 2rem;
+    padding: 4rem 2rem;
     background-color: var(--bg-section);
 }
 
@@ -1491,18 +1491,18 @@ footer {
    PRODUCT PAGES
    =================================== */
 .product-content {
-    padding: 4rem 2rem;
+    padding: 3rem 2rem;
 }
 
 .product-intro {
     max-width: 900px;
-    margin: 0 auto 4rem;
+    margin: 0 auto 3rem;
     text-align: center;
 }
 
 .product-intro h2 {
     font-size: 2.25rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .product-intro p {
@@ -1511,13 +1511,13 @@ footer {
 }
 
 .product-benefits {
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
 }
 
 .product-benefits h2 {
     text-align: center;
-    font-size: 2.25rem;
-    margin-bottom: 2.5rem;
+    font-size: 2rem;
+    margin-bottom: 2rem;
 }
 
 .benefits-grid {
@@ -1762,6 +1762,160 @@ footer {
     left: 0;
     color: var(--secondary-color);
     font-weight: bold;
+}
+
+/* Geographies Section */
+.product-geographies {
+    margin-bottom: 3rem;
+    background: var(--bg-light);
+    padding: 2.5rem;
+    border-radius: 1rem;
+}
+
+.product-geographies h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.geographies-list {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.geography-badge {
+    background: var(--bg-white);
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    font-size: 1.05rem;
+}
+
+/* Information Needed Section */
+.product-information {
+    margin-bottom: 3rem;
+}
+
+.product-information h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.information-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.information-category {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border: 2px solid var(--border-color);
+}
+
+.information-category h4 {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+}
+
+.information-category ul {
+    list-style: none;
+    padding: 0;
+}
+
+.information-category ul li {
+    padding: 0.5rem 0 0.5rem 1.5rem;
+    position: relative;
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.information-category ul li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-weight: bold;
+}
+
+/* Case Studies Section */
+.product-case-studies {
+    margin-bottom: 3rem;
+}
+
+.product-case-studies h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+.case-studies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.case-study-card {
+    background: var(--bg-light);
+    padding: 2rem;
+    border-radius: 0.75rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+.case-study-label {
+    display: inline-block;
+    background: var(--accent-color);
+    color: var(--bg-white);
+    padding: 0.4rem 1rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.case-study-card h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    color: var(--text-dark);
+}
+
+.case-study-card p {
+    font-size: 0.95rem;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+}
+
+.case-study-metrics {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.metric {
+    text-align: center;
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    display: block;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
 }
 
 /* ===================================
