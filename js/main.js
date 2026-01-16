@@ -6,40 +6,6 @@
 document.addEventListener('DOMContentLoaded', function() {
 
     // ===================================
-    // Mobile Navigation Toggle
-    // ===================================
-    const navMenu = document.querySelector('.nav-menu');
-    const navbar = document.querySelector('.navbar');
-
-    // Add mobile menu button if on small screen
-    if (window.innerWidth <= 768 && navMenu) {
-        addMobileMenuToggle();
-    }
-
-    window.addEventListener('resize', function() {
-        if (window.innerWidth <= 768 && navMenu && !document.querySelector('.mobile-menu-toggle')) {
-            addMobileMenuToggle();
-        }
-    });
-
-    function addMobileMenuToggle() {
-        const menuButton = document.createElement('button');
-        menuButton.className = 'mobile-menu-toggle';
-        menuButton.innerHTML = '☰';
-        menuButton.setAttribute('aria-label', 'Toggle navigation menu');
-
-        const logo = document.querySelector('.logo');
-        if (logo && !document.querySelector('.mobile-menu-toggle')) {
-            logo.parentNode.insertBefore(menuButton, navMenu);
-
-            menuButton.addEventListener('click', function() {
-                navMenu.classList.toggle('active');
-                menuButton.innerHTML = navMenu.classList.contains('active') ? '✕' : '☰';
-            });
-        }
-    }
-
-    // ===================================
     // Dropdown Navigation
     // ===================================
     const dropdowns = document.querySelectorAll('.dropdown');
