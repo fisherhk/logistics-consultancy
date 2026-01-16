@@ -310,6 +310,55 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // ===================================
+    // Hero Pillars Tab Switching
+    // ===================================
+    const pillarTabs = document.querySelectorAll('.pillar-tab');
+    const productsContents = document.querySelectorAll('.products-content');
+
+    if (pillarTabs.length > 0 && productsContents.length > 0) {
+        pillarTabs.forEach(function(tab) {
+            tab.addEventListener('mouseenter', function() {
+                const pillar = this.dataset.pillar;
+
+                // Update active tab
+                pillarTabs.forEach(function(t) {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                // Update active content
+                productsContents.forEach(function(content) {
+                    if (content.dataset.pillar === pillar) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+
+            // Also handle click for mobile/touch devices
+            tab.addEventListener('click', function() {
+                const pillar = this.dataset.pillar;
+
+                // Update active tab
+                pillarTabs.forEach(function(t) {
+                    t.classList.remove('active');
+                });
+                this.classList.add('active');
+
+                // Update active content
+                productsContents.forEach(function(content) {
+                    if (content.dataset.pillar === pillar) {
+                        content.classList.add('active');
+                    } else {
+                        content.classList.remove('active');
+                    }
+                });
+            });
+        });
+    }
+
+    // ===================================
     // Console message
     // ===================================
     console.log('%cGlobalLogistics Website', 'color: #1e3a8a; font-size: 20px; font-weight: bold;');
