@@ -1,0 +1,27 @@
+# Jekyll Configuration
+title: GlobalLogistics
+description: Your trusted partner in supply chain excellence
+url: ""
+baseurl: ""
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+# Exclude from processing
+exclude:
+  - README.md
+  - node_modules
+  - .git
+
+# Include pages folder
+include:
+  - pages
+
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"

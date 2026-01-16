@@ -1,0 +1,19 @@
+---
+layout: default
+---
+<section class="page-header">
+    <div class="container">
+        <h1>{{ page.title }}</h1>
+        <p>{{ page.tagline }}</p>
+    </div>
+</section>
+
+{{ content }}
+
+<section class="cta">
+    <div class="container">
+        <h2>{{ page.cta_title | default: "Ready to Get Started?" }}</h2>
+        <p>{{ page.cta_text | default: "Let's discuss how we can help transform your logistics operations" }}</p>
+        <a href="{{ '/pages/contact.html' | relative_url }}" class="btn-secondary">Contact Us Today</a>
+    </div>
+</section>
