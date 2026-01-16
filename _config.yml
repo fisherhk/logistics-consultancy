@@ -1,8 +1,8 @@
 # Jekyll Configuration
 title: GlobalLogistics
 description: Your trusted partner in supply chain excellence
-url: ""
-baseurl: ""
+url: "https://fisherhk.github.io"
+baseurl: "/logistics-consultancy"
 
 # Build settings
 markdown: kramdown
