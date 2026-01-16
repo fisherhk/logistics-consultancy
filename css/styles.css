@@ -2181,6 +2181,274 @@ footer {
 }
 
 /* ===================================
+   COMPACT PRODUCT FLOW LAYOUT
+   Input > Process > Output side-by-side
+   =================================== */
+.product-flow {
+    margin-bottom: 3rem;
+}
+
+.product-flow-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.product-flow-header h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.product-flow-header p {
+    font-size: 1.1rem;
+    color: var(--text-light);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.flow-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    gap: 0;
+    align-items: stretch;
+    background: var(--bg-light);
+    border-radius: 1rem;
+    overflow: hidden;
+    border: 2px solid var(--border-color);
+}
+
+.flow-column {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.flow-column.input {
+    background: var(--bg-white);
+}
+
+.flow-column.process {
+    background: var(--bg-light);
+}
+
+.flow-column.output {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--bg-white);
+}
+
+.flow-column-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.flow-column.output .flow-column-header {
+    border-bottom-color: rgba(255, 255, 255, 0.2);
+}
+
+.flow-column-icon {
+    font-size: 1.5rem;
+}
+
+.flow-column-header h3 {
+    font-size: 1rem;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 700;
+}
+
+.flow-column.output .flow-column-header h3 {
+    color: var(--bg-white);
+}
+
+.flow-column-header span.label {
+    font-size: 0.75rem;
+    color: var(--text-light);
+    display: block;
+    margin-top: 0.25rem;
+    text-transform: none;
+    letter-spacing: normal;
+    font-weight: 400;
+}
+
+.flow-column.output .flow-column-header span.label {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.flow-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+}
+
+.flow-list li {
+    padding: 0.5rem 0;
+    padding-left: 1.25rem;
+    position: relative;
+    font-size: 0.9rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+.flow-list li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-color);
+    font-size: 0.75rem;
+}
+
+.flow-column.output .flow-list li {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.flow-column.output .flow-list li::before {
+    color: var(--accent-color);
+}
+
+.flow-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+    color: var(--secondary-color);
+    background: var(--bg-light);
+}
+
+.flow-arrow span {
+    opacity: 0.6;
+}
+
+/* Compact Process Steps within Flow */
+.flow-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.flow-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.flow-step-num {
+    min-width: 24px;
+    height: 24px;
+    background: var(--secondary-color);
+    color: var(--bg-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.flow-step-text {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    line-height: 1.4;
+}
+
+/* Mobile responsive for flow layout */
+@media (max-width: 968px) {
+    .flow-container {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .flow-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem;
+        font-size: 1.5rem;
+        background: var(--bg-light);
+    }
+
+    /* Replace horizontal arrow with downward arrow on mobile */
+    .flow-arrow span {
+        display: none;
+    }
+
+    .flow-arrow::after {
+        content: '↓';
+        display: block;
+        opacity: 0.6;
+    }
+
+    .flow-column {
+        padding: 1.25rem;
+    }
+
+    .flow-column-header {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .flow-column-header > div {
+        text-align: center;
+    }
+
+    .flow-column-icon {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .product-flow-header h2 {
+        font-size: 1.5rem;
+    }
+
+    .product-flow-header p {
+        font-size: 0.95rem;
+    }
+
+    .flow-column {
+        padding: 1rem;
+    }
+
+    .flow-column-header h3 {
+        font-size: 0.9rem;
+    }
+
+    .flow-list li {
+        font-size: 0.85rem;
+        padding: 0.4rem 0;
+        padding-left: 1rem;
+    }
+
+    .flow-step {
+        gap: 0.5rem;
+    }
+
+    .flow-step-num {
+        min-width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+    }
+
+    .flow-step-text {
+        font-size: 0.8rem;
+    }
+
+    .flow-arrow {
+        padding: 0.5rem;
+        font-size: 1.25rem;
+    }
+}
+
+/* ===================================
    ANIMATIONS
    =================================== */
 @keyframes fadeIn {
