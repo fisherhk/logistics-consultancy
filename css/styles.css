@@ -199,13 +199,22 @@ header {
     margin-left: 0.25rem;
 }
 
-/* Hide mobile menu checkbox and toggle on desktop */
+/* Hide mobile menu checkbox (always hidden, controlled via label) */
 .mobile-menu-checkbox {
     display: none;
 }
 
+/* Hide mobile menu toggle on desktop */
 .mobile-menu-toggle {
     display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    z-index: 1001;
+    position: relative;
 }
 
 .dropdown-menu {
@@ -1347,6 +1356,12 @@ footer {
     /* Mobile Navigation */
     .navbar .container {
         flex-wrap: wrap;
+        position: relative;
+    }
+
+    .logo {
+        order: 1;
+        flex: 1;
     }
 
     .nav-menu {
@@ -1364,6 +1379,7 @@ footer {
         overflow-y: auto;
         box-shadow: var(--shadow-lg);
         z-index: 999;
+        order: 3;
     }
 
     /* CSS-only mobile menu toggle */
@@ -1451,19 +1467,10 @@ footer {
         content: ' ▴';
     }
 
-    /* Mobile Menu Toggle Button - CSS Only */
+    /* Mobile Menu Toggle Button - Show on mobile */
     .mobile-menu-toggle {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0.5rem;
-        margin-left: auto;
-        width: 44px;
-        height: 44px;
-        z-index: 1001;
+        order: 2;
     }
 
     .hamburger-icon {
@@ -1473,6 +1480,7 @@ footer {
         background-color: #ffffff;
         transition: background-color 0.2s;
         display: block;
+        border-radius: 2px;
     }
 
     .hamburger-icon::before,
@@ -1484,14 +1492,15 @@ footer {
         height: 3px;
         background-color: #ffffff;
         transition: transform 0.3s, top 0.3s;
+        border-radius: 2px;
     }
 
     .hamburger-icon::before {
-        top: -7px;
+        top: -8px;
     }
 
     .hamburger-icon::after {
-        top: 7px;
+        top: 8px;
     }
 
     /* Transform to X when checked */
@@ -2445,6 +2454,89 @@ footer {
     .flow-arrow {
         padding: 0.5rem;
         font-size: 1.25rem;
+    }
+
+    /* Reduce whitespace on product page sections for mobile */
+    .product-flow {
+        margin-bottom: 1.5rem;
+    }
+
+    .product-flow-header {
+        margin-bottom: 1rem;
+    }
+
+    .product-geographies {
+        margin-bottom: 1.5rem;
+        padding: 1.25rem;
+    }
+
+    .product-geographies h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .geographies-list {
+        gap: 0.75rem;
+    }
+
+    .geography-badge {
+        padding: 0.5rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .product-case-studies {
+        margin-bottom: 1.5rem;
+    }
+
+    .product-case-studies h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1rem;
+    }
+
+    .case-studies-grid {
+        gap: 1rem;
+    }
+
+    .case-study-card {
+        padding: 1.25rem;
+    }
+
+    .case-study-card h4 {
+        font-size: 1rem;
+    }
+
+    .case-study-card p {
+        font-size: 0.85rem;
+    }
+
+    .case-study-metrics {
+        gap: 1rem;
+        margin-top: 1rem;
+        padding-top: 1rem;
+    }
+
+    .metric-value {
+        font-size: 1.25rem;
+    }
+
+    .metric-label {
+        font-size: 0.75rem;
+    }
+
+    .product-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .product-intro {
+        margin-bottom: 1.5rem;
+    }
+
+    .product-intro h2 {
+        font-size: 1.5rem;
+    }
+
+    .product-intro p {
+        font-size: 0.95rem;
     }
 }
 
