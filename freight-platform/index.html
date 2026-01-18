@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreightView - Transactional Freight Management</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h1>FreightView</h1>
+            <span class="tagline">by GlobalLogistics</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-link active" data-view="dashboard">Dashboard</a>
+            <a href="#" class="nav-link" data-view="new-request">New Request</a>
+            <a href="#" class="nav-link" data-view="quotes">Quote History</a>
+            <a href="#" class="nav-link" data-view="analytics">Analytics</a>
+        </div>
+        <div class="nav-user">
+            <span class="user-name">Demo User</span>
+            <div class="user-avatar">DU</div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <!-- Dashboard View -->
+        <div id="dashboard-view" class="view active">
+            <div class="page-header">
+                <h2>Dashboard</h2>
+                <p>Overview of your freight quoting activity</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📦</div>
+                    <div class="stat-content">
+                        <span class="stat-value">24</span>
+                        <span class="stat-label">Active Requests</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📋</div>
+                    <div class="stat-content">
+                        <span class="stat-value">87</span>
+                        <span class="stat-label">Quotes Received</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">💰</div>
+                    <div class="stat-content">
+                        <span class="stat-value">$127K</span>
+                        <span class="stat-label">Savings YTD</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-content">
+                        <span class="stat-value">4.2h</span>
+                        <span class="stat-label">Avg. Quote Time</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card recent-requests">
+                    <div class="card-header">
+                        <h3>Recent Requests</h3>
+                        <a href="#" class="view-all" data-view="quotes">View All</a>
+                    </div>
+                    <div class="request-list" id="recent-requests-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="card pending-decisions">
+                    <div class="card-header">
+                        <h3>Pending Decisions</h3>
+                        <span class="badge">3 awaiting</span>
+                    </div>
+                    <div class="decision-list" id="pending-decisions-list">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- New Request View -->
+        <div id="new-request-view" class="view">
+            <div class="page-header">
+                <h2>New Shipment Request</h2>
+                <p>Submit details to get quotes from your designated forwarders</p>
+            </div>
+
+            <form id="shipment-form" class="shipment-form">
+                <div class="form-section">
+                    <h3>Shipment Details</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="reference">Reference Number</label>
+                            <input type="text" id="reference" placeholder="e.g., PO-2024-001">
+                        </div>
+                        <div class="form-group">
+                            <label for="cargo-type">Cargo Type</label>
+                            <select id="cargo-type">
+                                <option value="">Select type...</option>
+                                <option value="general">General Cargo</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="apparel">Apparel & Textiles</option>
+                                <option value="perishable">Perishables</option>
+                                <option value="hazmat">Hazardous Materials</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Origin & Destination</h3>
+                    <div class="form-grid two-col">
+                        <div class="location-card origin">
+                            <h4>Origin</h4>
+                            <div class="form-group">
+                                <label for="origin-country">Country</label>
+                                <select id="origin-country">
+                                    <option value="">Select country...</option>
+                                    <option value="CN">China</option>
+                                    <option value="VN">Vietnam</option>
+                                    <option value="TW">Taiwan</option>
+                                    <option value="TH">Thailand</option>
+                                    <option value="IN">India</option>
+                                    <option value="MY">Malaysia</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="origin-city">City/Port</label>
+                                <input type="text" id="origin-city" placeholder="e.g., Shanghai">
+                            </div>
+                        </div>
+                        <div class="location-card destination">
+                            <h4>Destination</h4>
+                            <div class="form-group">
+                                <label for="dest-country">Country</label>
+                                <select id="dest-country">
+                                    <option value="">Select country...</option>
+                                    <option value="US">United States</option>
+                                    <option value="MX">Mexico</option>
+                                    <option value="BR">Brazil</option>
+                                    <option value="DE">Germany</option>
+                                    <option value="GB">United Kingdom</option>
+                                    <option value="AU">Australia</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="dest-city">City/Port</label>
+                                <input type="text" id="dest-city" placeholder="e.g., Los Angeles">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Cargo Specifications</h3>
+                    <div class="form-grid four-col">
+                        <div class="form-group">
+                            <label for="weight">Total Weight</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="weight" placeholder="0">
+                                <select id="weight-unit">
+                                    <option value="kg">kg</option>
+                                    <option value="lbs">lbs</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="volume">Total Volume</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="volume" placeholder="0">
+                                <select id="volume-unit">
+                                    <option value="cbm">CBM</option>
+                                    <option value="cft">CFT</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="pieces">Pieces/Cartons</label>
+                            <input type="number" id="pieces" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="value">Cargo Value (USD)</label>
+                            <input type="number" id="value" placeholder="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Requirements</h3>
+                    <div class="form-grid two-col">
+                        <div class="form-group">
+                            <label for="ready-date">Cargo Ready Date</label>
+                            <input type="date" id="ready-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="delivery-date">Required Delivery Date</label>
+                            <input type="date" id="delivery-date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mode Preference</label>
+                        <div class="mode-options">
+                            <label class="mode-option">
+                                <input type="radio" name="mode" value="any" checked>
+                                <span class="mode-card">
+                                    <span class="mode-icon">🔄</span>
+                                    <span class="mode-label">Quote Both</span>
+                                    <span class="mode-desc">Compare air & sea options</span>
+                                </span>
+                            </label>
+                            <label class="mode-option">
+                                <input type="radio" name="mode" value="air">
+                                <span class="mode-card">
+                                    <span class="mode-icon">✈️</span>
+                                    <span class="mode-label">Air Only</span>
+                                    <span class="mode-desc">Fastest transit time</span>
+                                </span>
+                            </label>
+                            <label class="mode-option">
+                                <input type="radio" name="mode" value="sea">
+                                <span class="mode-card">
+                                    <span class="mode-icon">🚢</span>
+                                    <span class="mode-label">Sea Only</span>
+                                    <span class="mode-desc">Most economical</span>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Select Forwarders</h3>
+                    <p class="section-desc">Choose which of your designated forwarders to request quotes from</p>
+                    <div class="forwarder-grid">
+                        <label class="forwarder-option">
+                            <input type="checkbox" name="forwarders" value="dhl" checked>
+                            <span class="forwarder-card">
+                                <span class="forwarder-logo">DHL</span>
+                                <span class="forwarder-name">DHL Global Forwarding</span>
+                            </span>
+                        </label>
+                        <label class="forwarder-option">
+                            <input type="checkbox" name="forwarders" value="kuehne" checked>
+                            <span class="forwarder-card">
+                                <span class="forwarder-logo">K+N</span>
+                                <span class="forwarder-name">Kuehne + Nagel</span>
+                            </span>
+                        </label>
+                        <label class="forwarder-option">
+                            <input type="checkbox" name="forwarders" value="db-schenker" checked>
+                            <span class="forwarder-card">
+                                <span class="forwarder-logo">DBS</span>
+                                <span class="forwarder-name">DB Schenker</span>
+                            </span>
+                        </label>
+                        <label class="forwarder-option">
+                            <input type="checkbox" name="forwarders" value="expeditors">
+                            <span class="forwarder-card">
+                                <span class="forwarder-logo">EXP</span>
+                                <span class="forwarder-name">Expeditors</span>
+                            </span>
+                        </label>
+                        <label class="forwarder-option">
+                            <input type="checkbox" name="forwarders" value="flexport">
+                            <span class="forwarder-card">
+                                <span class="forwarder-logo">FLX</span>
+                                <span class="forwarder-name">Flexport</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Additional Notes</h3>
+                    <textarea id="notes" rows="3" placeholder="Any special requirements or instructions..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary">Save Draft</button>
+                    <button type="submit" class="btn btn-primary">Submit Request</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Quotes View -->
+        <div id="quotes-view" class="view">
+            <div class="page-header">
+                <h2>Quote Comparison</h2>
+                <p>Compare quotes across forwarders and modes</p>
+            </div>
+
+            <div class="quote-filters">
+                <div class="filter-group">
+                    <label>Request:</label>
+                    <select id="request-filter">
+                        <option value="REQ-2024-047">REQ-2024-047: Shanghai → Los Angeles</option>
+                        <option value="REQ-2024-046">REQ-2024-046: Shenzhen → New York</option>
+                        <option value="REQ-2024-045">REQ-2024-045: Ho Chi Minh → Chicago</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Mode:</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" data-mode="all">All</button>
+                        <button class="toggle-btn" data-mode="air">Air</button>
+                        <button class="toggle-btn" data-mode="sea">Sea</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shipment-summary">
+                <div class="summary-item">
+                    <span class="summary-label">Route</span>
+                    <span class="summary-value">Shanghai, CN → Los Angeles, US</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Cargo</span>
+                    <span class="summary-value">Electronics • 2,500 kg • 15 CBM</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Ready Date</span>
+                    <span class="summary-value">Jan 25, 2026</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Required By</span>
+                    <span class="summary-value">Feb 15, 2026</span>
+                </div>
+            </div>
+
+            <div class="quotes-container">
+                <div class="mode-section" id="air-quotes">
+                    <div class="mode-header">
+                        <h3>✈️ Air Freight Options</h3>
+                        <span class="mode-badge air">5-7 days transit</span>
+                    </div>
+                    <div class="quote-cards" id="air-quote-cards">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="mode-section" id="sea-quotes">
+                    <div class="mode-header">
+                        <h3>🚢 Sea Freight Options</h3>
+                        <span class="mode-badge sea">18-25 days transit</span>
+                    </div>
+                    <div class="quote-cards" id="sea-quote-cards">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="comparison-actions">
+                <button class="btn btn-secondary" id="export-comparison">Export Comparison</button>
+                <button class="btn btn-primary" id="view-analysis">View Mode Analysis</button>
+            </div>
+        </div>
+
+        <!-- Analytics View -->
+        <div id="analytics-view" class="view">
+            <div class="page-header">
+                <h2>Air vs Sea Mode Analysis</h2>
+                <p>Cost-transit trade-off visualization for REQ-2024-047</p>
+            </div>
+
+            <div class="analysis-container">
+                <div class="chart-section">
+                    <div class="card">
+                        <h3>Cost vs Transit Time</h3>
+                        <div class="chart-container" id="tradeoff-chart">
+                            <!-- SVG Chart -->
+                        </div>
+                        <div class="chart-legend">
+                            <span class="legend-item air"><span class="dot"></span> Air Freight</span>
+                            <span class="legend-item sea"><span class="dot"></span> Sea Freight</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="analysis-summary">
+                    <div class="card recommendation">
+                        <h3>Recommendation</h3>
+                        <div class="rec-content">
+                            <div class="rec-badge sea">Sea Freight Recommended</div>
+                            <p class="rec-reason">Based on your Feb 15 delivery requirement, sea freight provides <strong>68% cost savings</strong> while meeting your timeline with 5 days buffer.</p>
+                            <div class="rec-details">
+                                <div class="rec-detail">
+                                    <span class="detail-label">Best Air Option</span>
+                                    <span class="detail-value">DHL @ $8,450</span>
+                                    <span class="detail-sub">Arrives Feb 1</span>
+                                </div>
+                                <div class="rec-detail">
+                                    <span class="detail-label">Best Sea Option</span>
+                                    <span class="detail-value">K+N @ $2,680</span>
+                                    <span class="detail-sub">Arrives Feb 10</span>
+                                </div>
+                                <div class="rec-detail highlight">
+                                    <span class="detail-label">Potential Savings</span>
+                                    <span class="detail-value savings">$5,770</span>
+                                    <span class="detail-sub">68% reduction</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card factors">
+                        <h3>Decision Factors</h3>
+                        <div class="factor-list">
+                            <div class="factor">
+                                <div class="factor-header">
+                                    <span class="factor-name">Timeline Flexibility</span>
+                                    <span class="factor-value high">High</span>
+                                </div>
+                                <div class="factor-bar">
+                                    <div class="factor-fill" style="width: 85%"></div>
+                                </div>
+                                <p class="factor-note">21 days available, only 18-20 needed for sea</p>
+                            </div>
+                            <div class="factor">
+                                <div class="factor-header">
+                                    <span class="factor-name">Inventory Carrying Cost</span>
+                                    <span class="factor-value medium">Medium</span>
+                                </div>
+                                <div class="factor-bar">
+                                    <div class="factor-fill" style="width: 45%"></div>
+                                </div>
+                                <p class="factor-note">~$120/day based on cargo value</p>
+                            </div>
+                            <div class="factor">
+                                <div class="factor-header">
+                                    <span class="factor-name">Risk Tolerance</span>
+                                    <span class="factor-value medium">Medium</span>
+                                </div>
+                                <div class="factor-bar">
+                                    <div class="factor-fill" style="width: 50%"></div>
+                                </div>
+                                <p class="factor-note">5-day buffer for potential delays</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="historical-section">
+                <div class="card">
+                    <h3>Historical Rate Trends - Shanghai to Los Angeles</h3>
+                    <div class="trend-chart" id="trend-chart">
+                        <!-- SVG Chart -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal for Quote Details -->
+    <div id="quote-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Quote Details</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="quote-modal-body">
+                <!-- Populated by JS -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary modal-close">Close</button>
+                <button class="btn btn-primary">Select This Quote</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">
+        <span class="toast-message"></span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
